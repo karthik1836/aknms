@@ -1,4 +1,4 @@
-package com.cmad1.fault.model;
+package com.cmad1.fault.api.model;
 
 public class Event {
 
