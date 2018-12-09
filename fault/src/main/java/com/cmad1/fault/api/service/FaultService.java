@@ -1,11 +1,17 @@
 package com.cmad1.fault.api.service;
 
-import com.cmad1.fault.api.Faults;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.cmad1.fault.api.Faults;
+import com.cmad1.fault.api.repo.EventRepo;
+
+
+@Service
 public class FaultService implements Faults {
 
-	public FaultService() {
-		// TODO Auto-generated constructor stub
-	}
+	@Autowired
+	private EventRepo eventRepo;
+	
 
 }
