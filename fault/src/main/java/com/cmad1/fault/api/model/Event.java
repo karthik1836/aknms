@@ -1,11 +1,11 @@
 package com.cmad1.fault.api.model;
 
-import java.net.InetAddress;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,7 +19,11 @@ public class Event {
 	private long timestamp;
 	
 	@NotNull
-	private InetAddress source;
+	@ManyToOne(targetEntity=ManagedElement.class)
+	@JoinColumn(name="source", referencedColumnName="ipAddress")
+	private String source;
+	
+	private String message;
 	
 	@NotNull 
 	private EventType type;
@@ -40,11 +44,12 @@ public class Event {
 		this.timestamp = timestamp;
 	}
 
-	public InetAddress getSource() {
+
+	public String getSource() {
 		return source;
 	}
 
-	public void setSource(InetAddress source) {
+	public void setSource(String source) {
 		this.source = source;
 	}
 
@@ -54,6 +59,14 @@ public class Event {
 
 	public void setType(EventType type) {
 		this.type = type;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 	

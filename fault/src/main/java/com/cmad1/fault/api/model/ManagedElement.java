@@ -1,7 +1,5 @@
 package com.cmad1.fault.api.model;
 
-import java.net.InetAddress;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +14,7 @@ public class ManagedElement {
 	private long id;
 	
 	@NotNull
-	private InetAddress ipAddress;
+	private String ipAddress;
 	
 	@NotNull 
 	private boolean communicationState;
@@ -29,11 +27,11 @@ public class ManagedElement {
 		this.id = id;
 	}
 
-	public InetAddress getIpAddress() {
+	public String getIpAddress() {
 		return ipAddress;
 	}
 
-	public void setIpAddress(InetAddress ipAddress) {
+	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
 
