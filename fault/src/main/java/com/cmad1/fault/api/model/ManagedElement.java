@@ -1,5 +1,6 @@
 package com.cmad1.fault.api.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class ManagedElement {
 	private long id;
 	
 	@NotNull
+	@Column(length=15)
 	private String ipAddress;
 	
 	@NotNull 
