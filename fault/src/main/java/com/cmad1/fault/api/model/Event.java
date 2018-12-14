@@ -1,6 +1,8 @@
 package com.cmad1.fault.api.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,13 +21,14 @@ public class Event {
 	private long timestamp;
 	
 	@NotNull
-	@ManyToOne(targetEntity=ManagedElement.class)
+	@ManyToOne
 	@JoinColumn(name="source", referencedColumnName="ipAddress")
-	private String source;
+	private ManagedElement managedElement;
 	
 	private String message;
 	
 	@NotNull 
+    @Enumerated(EnumType.STRING)
 	private EventType type;
 
 	public long getId() {
@@ -44,13 +47,12 @@ public class Event {
 		this.timestamp = timestamp;
 	}
 
-
-	public String getSource() {
-		return source;
+	public ManagedElement getManagedElement() {
+		return managedElement;
 	}
 
-	public void setSource(String source) {
-		this.source = source;
+	public void setManagedElement(ManagedElement managedElement) {
+		this.managedElement = managedElement;
 	}
 
 	public EventType getType() {
