@@ -1,5 +1,6 @@
 package com.cmad1.fault.api.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,9 +26,11 @@ public class Event {
 	@JoinColumn(name="source", referencedColumnName="ipAddress")
 	private ManagedElement managedElement;
 	
+	@Column(length=1024)
 	private String message;
 	
 	@NotNull 
+	@Column(length=20)
     @Enumerated(EnumType.STRING)
 	private EventType type;
 
