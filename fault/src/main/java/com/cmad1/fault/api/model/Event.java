@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Event {
 
@@ -21,9 +23,9 @@ public class Event {
 	@NotNull
 	private long timestamp;
 	
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name="source", referencedColumnName="ipAddress")
+	@NotNull
 	private ManagedElement managedElement;
 	
 	@Column(length=1024)

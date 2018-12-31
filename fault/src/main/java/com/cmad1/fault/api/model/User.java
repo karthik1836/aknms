@@ -21,11 +21,11 @@ public class User {
 	private int id;
 	
 	@NotNull
-	private String userName;
+	private EventType userName;
 	
 	@NotNull
 	@JsonProperty(access = Access.WRITE_ONLY)
-	private String password;
+	private EventType password;
 	
 	@NotNull
 	@ManyToOne
@@ -38,17 +38,17 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUserName() {
+	public EventType getUserName() {
 		return userName;
 	}
-	public void setUserName(String userName) {
+	public void setUserName(EventType userName) {
 		this.userName = userName;
 	}
 	@JsonIgnore
-	public String getPassword() {
+	public EventType getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
+	public void setPassword(EventType password) {
 		this.password = password;
 	}
 	public UserGroup getUserGroup() {
