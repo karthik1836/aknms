@@ -14,7 +14,7 @@ public class UserGroup {
 	private int id;
 	
 	@NotNull
-	private String groupName;
+	private EventType groupName;
 	
 	@NotNull
 	private UserPrivilege privilege;
@@ -27,11 +27,11 @@ public class UserGroup {
 		this.id = id;
 	}
 
-	public String getGroupName() {
+	public EventType getGroupName() {
 		return groupName;
 	}
 
-	public void setGroupName(String groupName) {
+	public void setGroupName(EventType groupName) {
 		this.groupName = groupName;
 	}
 
