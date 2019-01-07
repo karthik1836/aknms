@@ -1,12 +1,17 @@
 package com.cmad1.fault.api.model;
 
-import java.net.InetAddress;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Event {
@@ -18,10 +23,17 @@ public class Event {
 	@NotNull
 	private long timestamp;
 	
+	@ManyToOne
+	@JoinColumn(name="source", referencedColumnName="ipAddress")
 	@NotNull
-	private InetAddress source;
+	private ManagedElement managedElement;
+	
+	@Column(length=1024)
+	private String message;
 	
 	@NotNull 
+	@Column(length=20)
+    @Enumerated(EnumType.STRING)
 	private EventType type;
 
 	public long getId() {
@@ -40,12 +52,12 @@ public class Event {
 		this.timestamp = timestamp;
 	}
 
-	public InetAddress getSource() {
-		return source;
+	public ManagedElement getManagedElement() {
+		return managedElement;
 	}
 
-	public void setSource(InetAddress source) {
-		this.source = source;
+	public void setManagedElement(ManagedElement managedElement) {
+		this.managedElement = managedElement;
 	}
 
 	public EventType getType() {
@@ -54,6 +66,14 @@ public class Event {
 
 	public void setType(EventType type) {
 		this.type = type;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 	

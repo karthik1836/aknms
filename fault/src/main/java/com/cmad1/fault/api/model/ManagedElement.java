@@ -1,7 +1,8 @@
 package com.cmad1.fault.api.model;
 
-import java.net.InetAddress;
+import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,14 +10,20 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class ManagedElement {
+public class ManagedElement implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.TABLE)
 	private long id;
 	
 	@NotNull
-	private InetAddress ipAddress;
+	@Column(length=15)
+	private String ipAddress;
 	
 	@NotNull 
 	private boolean communicationState;
@@ -29,11 +36,11 @@ public class ManagedElement {
 		this.id = id;
 	}
 
-	public InetAddress getIpAddress() {
+	public String getIpAddress() {
 		return ipAddress;
 	}
 
-	public void setIpAddress(InetAddress ipAddress) {
+	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
 
