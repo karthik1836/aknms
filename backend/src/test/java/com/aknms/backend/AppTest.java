@@ -1,4 +1,4 @@
-package com.cmad1.fault;
+package com.aknms.backend;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
