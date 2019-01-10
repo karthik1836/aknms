@@ -1,9 +1,9 @@
-package com.cmad1.fault.api;
+package com.aknms.backend.api;
 
 import java.util.List;
 
-import com.cmad1.fault.api.model.ManagedElement;
-import com.cmad1.fault.api.model.User;
+import com.aknms.backend.api.model.ManagedElement;
+import com.aknms.backend.api.model.User;
 
 public interface ManagedElements {
 	

@@ -1,4 +1,4 @@
-package com.cmad1.fault;
+package com.aknms.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

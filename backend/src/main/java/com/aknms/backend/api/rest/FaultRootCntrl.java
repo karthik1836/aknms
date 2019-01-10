@@ -1,4 +1,4 @@
-package com.cmad1.fault.api.rest;
+package com.aknms.backend.api.rest;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cmad1.fault.api.Faults;
-import com.cmad1.fault.api.model.Event;
-import com.cmad1.fault.api.model.EventTypeCount;
+import com.aknms.backend.api.Faults;
+import com.aknms.backend.api.model.Event;
+import com.aknms.backend.api.model.EventTypeCount;
 
 @RestController
 public class FaultRootCntrl {
