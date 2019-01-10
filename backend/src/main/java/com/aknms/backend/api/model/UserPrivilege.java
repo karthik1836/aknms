@@ -1,4 +1,4 @@
-package com.cmad1.fault.api.model;
+package com.aknms.backend.api.model;
 
 public enum UserPrivilege {
 

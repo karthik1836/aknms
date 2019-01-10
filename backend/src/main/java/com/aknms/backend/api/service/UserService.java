@@ -1,14 +1,14 @@
-package com.cmad1.fault.api.service;
+package com.aknms.backend.api.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cmad1.fault.api.Users;
-import com.cmad1.fault.api.model.User;
-import com.cmad1.fault.api.model.UserGroup;
-import com.cmad1.fault.api.repo.UserRepo;
+import com.aknms.backend.api.Users;
+import com.aknms.backend.api.model.User;
+import com.aknms.backend.api.model.UserGroup;
+import com.aknms.backend.api.repo.UserRepo;
 
 @Service
 public class UserService implements Users {

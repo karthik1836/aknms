@@ -1,10 +1,10 @@
-package com.cmad1.fault.api;
+package com.aknms.backend.api;
 
 import java.net.UnknownHostException;
 import java.util.List;
 
-import com.cmad1.fault.api.model.Event;
-import com.cmad1.fault.api.model.EventTypeCount;
+import com.aknms.backend.api.model.Event;
+import com.aknms.backend.api.model.EventTypeCount;
 
 public interface Faults {
 	

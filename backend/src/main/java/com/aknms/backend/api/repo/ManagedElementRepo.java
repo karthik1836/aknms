@@ -1,8 +1,8 @@
-package com.cmad1.fault.api.repo;
+package com.aknms.backend.api.repo;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.cmad1.fault.api.model.ManagedElement;
+import com.aknms.backend.api.model.ManagedElement;
 
 public interface ManagedElementRepo extends CrudRepository<ManagedElement, Integer> {
 

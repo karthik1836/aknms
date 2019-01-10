@@ -1,4 +1,4 @@
-package com.cmad1.fault.api.service;
+package com.aknms.backend.api.service;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -10,11 +10,11 @@ import org.hibernate.validator.internal.engine.groups.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cmad1.fault.api.Faults;
-import com.cmad1.fault.api.model.Event;
-import com.cmad1.fault.api.model.EventType;
-import com.cmad1.fault.api.model.EventTypeCount;
-import com.cmad1.fault.api.repo.EventRepo;
+import com.aknms.backend.api.Faults;
+import com.aknms.backend.api.model.Event;
+import com.aknms.backend.api.model.EventType;
+import com.aknms.backend.api.model.EventTypeCount;
+import com.aknms.backend.api.repo.EventRepo;
 
 
 @Service

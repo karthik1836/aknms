@@ -1,13 +1,13 @@
-package com.cmad1.fault.api.repo;
+package com.aknms.backend.api.repo;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.cmad1.fault.api.model.Event;
-import com.cmad1.fault.api.model.EventType;
-import com.cmad1.fault.api.model.EventTypeCount;
+import com.aknms.backend.api.model.Event;
+import com.aknms.backend.api.model.EventType;
+import com.aknms.backend.api.model.EventTypeCount;
 
 public interface EventRepo extends CrudRepository<Event, Integer> {
 

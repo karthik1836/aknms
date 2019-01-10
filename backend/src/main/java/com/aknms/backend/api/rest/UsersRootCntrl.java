@@ -1,15 +1,14 @@
-package com.cmad1.fault.api.rest;
+package com.aknms.backend.api.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cmad1.fault.api.ManagedElements;
+import com.aknms.backend.api.Users;
 
 @RestController
-public class ManagedElementRootCntrl {
+public class UsersRootCntrl {
 
 	@Autowired
-	private ManagedElements managedElements;
-	
+	private Users users;
 
 }
