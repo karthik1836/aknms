@@ -13,7 +13,7 @@ public interface EventRepo extends CrudRepository<Event, Integer> {
 
 	Event findById(long id);
 
-	@Query("SELECT new com.cmad1.fault.api.model.EventTypeCount(e.type, COUNT(*)) FROM  Event e GROUP BY e.type")
+	@Query("SELECT new com.aknms.backend.api.model.EventTypeCount(e.type, COUNT(*)) FROM  Event e GROUP BY e.type")
 	List<EventTypeCount> countByEventType();
 	
 	@Query("Select e from Event e where e.timestamp > ?1")
