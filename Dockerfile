@@ -1,11 +1,9 @@
-FROM maven as build
-WORKDIR /opt/aknms-backend
-COPY . .
-RUN mvn clean -DSkipTests package
+FROM node:10.15.0-alpine
 
-
-FROM java:8
 WORKDIR /opt/
-EXPOSE 8080
-COPY --from=build /opt/aknms-backend/target/backend-*.jar .
-CMD java -jar *.jar
+
+COPY . .
+
+RUN npm install
+
+CMD npm start
