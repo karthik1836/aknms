@@ -22,3 +22,10 @@ services:
       - 8080
     depends_on:
       - db
+
+  frontend:
+    image: arunpalani87/aknms-frontend
+    ports:
+      - 3000
+    depends_on:
+      - backend

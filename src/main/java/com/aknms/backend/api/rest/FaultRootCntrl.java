@@ -1,11 +1,11 @@
 package com.aknms.backend.api.rest;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +52,9 @@ public class FaultRootCntrl {
 		} else {
 			event = faults.getAllEvents();
 		}
-		return new ResponseEntity<Iterable<Event>>(event, HttpStatus.OK);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Access-Control-Allow-Origin", "*");
+		return new ResponseEntity<Iterable<Event>>(event, headers, HttpStatus.OK);
 		
 	}
 	
