@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FaultManager {
 	public static void main(String[] args) throws InterruptedException {
-		Thread.sleep(150000L);
+		Thread.sleep(15000L);
 		SpringApplication.run(FaultManager.class, args);
 	}
 }
