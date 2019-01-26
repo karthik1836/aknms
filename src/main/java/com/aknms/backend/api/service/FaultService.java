@@ -3,10 +3,8 @@ package com.aknms.backend.api.service;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.validator.internal.engine.groups.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +37,11 @@ public class FaultService implements Faults {
 	@Override
 	public List<EventTypeCount> getEventCount() {
 		List<EventTypeCount> eventTypeCounts = eventRepo.countByEventType();
+		// Commenting creation of Total Events Count as react-minimal-pie doesn't need it
+		/*
 		Long count = eventRepo.count();
 		eventTypeCounts.add(new EventTypeCount(count));
+		*/
 		return eventTypeCounts;
 		
 	}
@@ -65,6 +66,12 @@ public class FaultService implements Faults {
 		
 		List<Event> events = eventRepo.findByType(EventType.valueOf(eventType));
 		
+		return events;
+	}
+
+	@Override
+	public List<Event> getNEventsFromRecordId(Integer fromRecordId, Integer recordCount) {
+		List<Event> events = eventRepo.findNEventsFromId(fromRecordId, recordCount);
 		return events;
 	}
 	

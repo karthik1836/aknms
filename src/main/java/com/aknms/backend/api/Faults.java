@@ -25,6 +25,6 @@ public interface Faults {
 	
 	public List<Event> getEventsLastSince(int lastSinceInMinutes);
 	
-	
+	public List<Event> getNEventsFromRecordId(Integer fromRecordId, Integer recordCount);
 
 }

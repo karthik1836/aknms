@@ -2,6 +2,6 @@ package com.aknms.backend.api.model;
 
 public enum EventType {
 	
-	ERROR, WARNING, NOTIFICATION
+	INFO, ERROR, WARNING, NOTIFICATION
 
 }
