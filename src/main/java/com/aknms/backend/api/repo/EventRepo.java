@@ -1,5 +1,6 @@
 package com.aknms.backend.api.repo;
 
+import java.net.InetAddress;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -19,7 +20,7 @@ public interface EventRepo extends CrudRepository<Event, Integer> {
 	@Query("Select e from Event e where e.timestamp > ?1")
 	List<Event> findByLastUpdatedInDate(long timestampSince);
 
-	List<Event> findAllByManagedElementIpAddress(String source);
+	List<Event> findAllByIpAddress(InetAddress source);
 
 	List<Event> findByType(EventType type);
 
