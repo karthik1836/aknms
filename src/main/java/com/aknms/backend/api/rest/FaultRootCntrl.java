@@ -23,8 +23,6 @@ import com.aknms.backend.api.model.EventTypeCount;
 @CrossOrigin
 public class FaultRootCntrl {
 
-	private static String ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
-
 	@Autowired
 	private Faults faults;
 

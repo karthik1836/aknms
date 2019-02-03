@@ -1,5 +1,7 @@
 package com.aknms.backend.api.model;
 
+import java.net.InetAddress;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,10 +25,9 @@ public class Event {
 	@NotNull
 	private long timestamp;
 	
-	@ManyToOne
-	@JoinColumn(name="source", referencedColumnName="ipAddress")
+	
 	@NotNull
-	private ManagedElement managedElement;
+	private InetAddress ipAddress;
 	
 	@Column(length=1024)
 	private String message;
@@ -52,13 +53,7 @@ public class Event {
 		this.timestamp = timestamp;
 	}
 
-	public ManagedElement getManagedElement() {
-		return managedElement;
-	}
-
-	public void setManagedElement(ManagedElement managedElement) {
-		this.managedElement = managedElement;
-	}
+	
 
 	public EventType getType() {
 		return type;
@@ -66,6 +61,14 @@ public class Event {
 
 	public void setType(EventType type) {
 		this.type = type;
+	}
+
+	public InetAddress getIpAddress() {
+		return ipAddress;
+	}
+
+	public void setIpAddress(InetAddress ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 
 	public String getMessage() {
