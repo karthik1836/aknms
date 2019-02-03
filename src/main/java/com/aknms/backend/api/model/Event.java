@@ -27,7 +27,7 @@ public class Event {
 	
 	
 	@NotNull
-	private InetAddress ipAddress;
+	private String ipAddress;
 	
 	@Column(length=1024)
 	private String message;
@@ -63,11 +63,11 @@ public class Event {
 		this.type = type;
 	}
 
-	public InetAddress getIpAddress() {
+	public String getIpAddress() {
 		return ipAddress;
 	}
 
-	public void setIpAddress(InetAddress ipAddress) {
+	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
 

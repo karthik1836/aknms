@@ -57,7 +57,8 @@ public class FaultService implements Faults {
 	@Override
 	public List<Event> getEventsByDeviceIP(String ipAddress) throws UnknownHostException {
 		InetAddress inetAddress = InetAddress.getByName(ipAddress);
-	    List<Event> events = eventRepo.findAllByIpAddress(inetAddress);
+		
+	    List<Event> events = eventRepo.findAllByIpAddress(ipAddress);
 		return events;
 	}
 
