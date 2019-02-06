@@ -8,38 +8,40 @@ public class EventTypeCount implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@SuppressWarnings("unused")
-	private String eventType;
-	@SuppressWarnings("unused")
-	private long count;
+	private String title;
+	private long value;
+	private String color;
 	
-	private static String TOTAL = "TOTAL";
-
 	
 	public EventTypeCount(EventType eventType, Long count) {
-		this.eventType = eventType.toString();
-		this.count = count;
+		this.title = eventType.name();
+		this.color = eventType.getColor();
+		this.value = count;
 	}
 
-	public EventTypeCount(Long count) {
-		this.eventType = TOTAL;
-		this.count = count;
+
+	public String getTitle() {
+		return title;
 	}
 
-	public String getEventType() {
-		return eventType;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setEventType(String eventType) {
-		this.eventType = eventType;
+	public long getValue() {
+		return value;
 	}
 
-	public long getCount() {
-		return count;
+	public void setValue(long value) {
+		this.value = value;
 	}
 
-	public void setCount(long count) {
-		this.count = count;
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 
