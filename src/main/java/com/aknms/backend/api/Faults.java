@@ -15,16 +15,16 @@ public interface Faults {
 	
 	public Iterable<Event> getAllEvents();
 	
-	public List<Event> getEventsByDeviceIP(String ipAddress) throws UnknownHostException;
+	public List<Event> getEventsByDeviceIP(String ipAddress, Integer fromRecordId, Integer recordCount, String column, String direction) throws UnknownHostException;
 	
 	/* for Later use
 	public List<Event> getEventByDeviceId(long deviceId);
 	*/
 	
-	public List<Event> getEventByType(String eventType);
+	public List<Event> getEventByType(String eventType,  Integer fromRecordId, Integer recordCount, String column, String direction);
 	
-	public List<Event> getEventsLastSince(int lastSinceInMinutes);
+	public List<Event> getEventsLastSince(int lastSinceInMinutes,  Integer fromRecordId, Integer recordCount, String column, String direction);
 	
-	public List<Event> getNEventsFromRecordId(Integer fromRecordId, Integer recordCount);
+	public List<Event> getNEventsFromRecordId(Integer fromRecordId, Integer recordCount, String column, String direction);
 
 }

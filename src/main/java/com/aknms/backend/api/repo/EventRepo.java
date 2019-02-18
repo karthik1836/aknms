@@ -2,6 +2,7 @@ package com.aknms.backend.api.repo;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -17,13 +18,14 @@ public interface EventRepo extends CrudRepository<Event, Integer> {
 	List<EventTypeCount> countByEventType();
 
 	@Query("Select e from Event e where e.timestamp > ?1")
-	List<Event> findByLastUpdatedInDate(long timestampSince);
+	List<Event> findByLastUpdatedInDate(long timestampSince, Pageable pageable);
 
-	List<Event> findAllByIpAddress(String ipAddress);
+	List<Event> findAllByIpAddress(String ipAddress, Pageable pageable);
 
-	List<Event> findByType(EventType type);
+	List<Event> findByType(EventType type, Pageable pageable);
 
-	@Query(nativeQuery = true, value = "SELECT * from event where id >= ?1 ORDER BY id LIMIT ?2")
-	List<Event> findNEventsFromId(Integer idFrom, Integer recordCount);
+	@Query("SELECT e from Event e")
+	List<Event> findNEventsFromId(Pageable pageable);
+	
 
 }

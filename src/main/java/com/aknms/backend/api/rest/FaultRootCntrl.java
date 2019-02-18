@@ -44,18 +44,20 @@ public class FaultRootCntrl {
 	public ResponseEntity<Iterable<Event>> getEvent(@RequestParam(value = "type") Optional<String> eventType,
 			@RequestParam(value = "eventsLastSince") Optional<Integer> eventsLastSince,
 			@RequestParam(value = "source") Optional<String> source,
-			@RequestParam(value = "id-from") Optional<Integer> idFrom,
+			@RequestParam(value = "id-from", defaultValue = "0" ) Optional<Integer> idFrom,
+			@RequestParam(value = "sort_key", defaultValue = "id") Optional<String> column,
+			@RequestParam(value = "sort_dir", defaultValue = "ASC") Optional<String> direction,
 			@RequestParam(value = "count", defaultValue = "50") Optional<Integer> recordCount)
 			throws UnknownHostException {
 		Iterable<Event> event = null;
 		if (eventType.isPresent()) {
-			event = faults.getEventByType(eventType.get().toUpperCase().trim());
+			event = faults.getEventByType(eventType.get().toUpperCase().trim(), idFrom.get(), recordCount.get(), column.get(), direction.get());
 		} else if (eventsLastSince.isPresent()) {
-			event = faults.getEventsLastSince(eventsLastSince.get());
+			event = faults.getEventsLastSince(eventsLastSince.get(), idFrom.get(), recordCount.get(), column.get(), direction.get());
 		} else if (source.isPresent()) {
-			event = faults.getEventsByDeviceIP(source.get());
+			event = faults.getEventsByDeviceIP(source.get(), idFrom.get(), recordCount.get(), column.get(), direction.get());
 		} else if (idFrom.isPresent() && recordCount.isPresent()) {
-			event = faults.getNEventsFromRecordId(idFrom.get(), recordCount.get());
+			event = faults.getNEventsFromRecordId(idFrom.get(), recordCount.get(),  column.get(), direction.get());
 		} else {
 			event = faults.getAllEvents();
 		}

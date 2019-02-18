@@ -6,6 +6,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.aknms.backend.api.Faults;
@@ -48,33 +52,38 @@ public class FaultService implements Faults {
 
 	
 	@Override
-	public List<Event> getEventsLastSince(int lastSinceInMinutes) {
+	public List<Event> getEventsLastSince(int lastSinceInMinutes, Integer fromRecordId, Integer recordCount, String column, String direction) {
 		System.out.println(Calendar.getInstance().getTimeInMillis());
-		List<Event> events = eventRepo.findByLastUpdatedInDate(Calendar.getInstance().getTimeInMillis() - lastSinceInMinutes*60*1000);
+		Pageable getRecords = PageRequest.of(fromRecordId, recordCount, Sort.by(Direction.valueOf(direction.toUpperCase()), column));
+		
+		List<Event> events = eventRepo.findByLastUpdatedInDate(Calendar.getInstance().getTimeInMillis() - lastSinceInMinutes*60*1000, getRecords);
 		return events;
 	}
 
 	@Override
-	public List<Event> getEventsByDeviceIP(String ipAddress) throws UnknownHostException {
+	public List<Event> getEventsByDeviceIP(String ipAddress, Integer fromRecordId, Integer recordCount, String column, String direction) throws UnknownHostException {
 		InetAddress inetAddress = InetAddress.getByName(ipAddress);
+		Pageable getRecords = PageRequest.of(fromRecordId, recordCount, Sort.by(Direction.valueOf(direction.toUpperCase()), column));
 		
-	    List<Event> events = eventRepo.findAllByIpAddress(ipAddress);
+	    List<Event> events = eventRepo.findAllByIpAddress(ipAddress, getRecords);
 		return events;
 	}
 
 	@Override
-	public List<Event> getEventByType(String eventType) {
-		
-		List<Event> events = eventRepo.findByType(EventType.valueOf(eventType));
-		
+	public List<Event> getEventByType(String eventType, Integer fromRecordId, Integer recordCount, String column, String direction) {
+		Pageable getRecords = PageRequest.of(fromRecordId, recordCount, Sort.by(Direction.valueOf(direction.toUpperCase()), column));
+		List<Event> events = eventRepo.findByType(EventType.valueOf(eventType),getRecords);
 		return events;
 	}
 
 	@Override
-	public List<Event> getNEventsFromRecordId(Integer fromRecordId, Integer recordCount) {
-		List<Event> events = eventRepo.findNEventsFromId(fromRecordId, recordCount);
+	public List<Event> getNEventsFromRecordId(Integer fromRecordId, Integer recordCount, String column, String direction) {
+		Pageable getRecords = PageRequest.of(fromRecordId, recordCount, Sort.by(Direction.valueOf(direction.toUpperCase()), column));
+		List<Event> events = eventRepo.findNEventsFromId(getRecords);
 		return events;
 	}
 	
+	
+
 
 }
