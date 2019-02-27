@@ -9,6 +9,7 @@ import com.aknms.backend.api.Users;
 import com.aknms.backend.api.model.User;
 import com.aknms.backend.api.model.UserGroup;
 import com.aknms.backend.api.repo.UserRepo;
+import com.aknms.backend.api.exception.UserNotFoundException;
 
 @Service
 public class UserService implements Users {
@@ -41,9 +42,8 @@ public class UserService implements Users {
 	}
 
 	@Override
-	public User getUser(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUser(int id) throws UserNotFoundException {
+		return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException());
 	}
 
 	@Override

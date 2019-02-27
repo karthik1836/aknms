@@ -10,14 +10,14 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.context.annotation.Bean;
 
 /**
- * Application start for fault processor
+ * Application start for EventManager
  *
  */
 @SpringBootApplication
-public class FaultManager {
+public class EventManager {
 	public static void main(String[] args) throws InterruptedException {
-		Thread.sleep(15000L);
-		SpringApplication.run(FaultManager.class, args);
+		//Thread.sleep(15000L);
+		SpringApplication.run(EventManager.class, args);
 	}
 	
 	@Bean

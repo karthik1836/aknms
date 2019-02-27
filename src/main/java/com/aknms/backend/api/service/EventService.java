@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.aknms.backend.api.Faults;
+import com.aknms.backend.api.Events;
 import com.aknms.backend.api.model.Event;
 import com.aknms.backend.api.model.EventType;
 import com.aknms.backend.api.model.EventTypeCount;
@@ -20,7 +20,7 @@ import com.aknms.backend.api.repo.EventRepo;
 
 
 @Service
-public class FaultService implements Faults {
+public class EventService implements Events {
 
 	@Autowired
 	private EventRepo eventRepo;

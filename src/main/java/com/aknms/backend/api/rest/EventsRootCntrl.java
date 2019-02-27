@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aknms.backend.api.Faults;
+import com.aknms.backend.api.Events;
 import com.aknms.backend.api.model.Event;
 import com.aknms.backend.api.model.EventTypeCount;
 
 @RestController
 @CrossOrigin
-public class FaultRootCntrl {
+public class EventsRootCntrl {
 
 	@Autowired
-	private Faults faults;
+	private Events events;
 
 	@RequestMapping(value = "/event/count", method = RequestMethod.GET)
 	public ResponseEntity<List<EventTypeCount>> getEventsCount() {
-		List<EventTypeCount> eventCount = faults.getEventCount();
+		List<EventTypeCount> eventCount = events.getEventCount();
 		
 		return new ResponseEntity<List<EventTypeCount>>(eventCount, HttpStatus.OK);
 
@@ -36,7 +36,7 @@ public class FaultRootCntrl {
 
 	@RequestMapping(value = "/event/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Event> getEventById(@PathVariable int id) {
-		Event event = faults.getEventById(id);
+		Event event = events.getEventById(id);
 		return new ResponseEntity<Event>(event, HttpStatus.OK);
 	}
 
@@ -51,15 +51,15 @@ public class FaultRootCntrl {
 			throws UnknownHostException {
 		Iterable<Event> event = null;
 		if (eventType.isPresent()) {
-			event = faults.getEventByType(eventType.get().toUpperCase().trim(), idFrom.get(), recordCount.get(), column.get(), direction.get());
+			event = events.getEventByType(eventType.get().toUpperCase().trim(), idFrom.get(), recordCount.get(), column.get(), direction.get());
 		} else if (eventsLastSince.isPresent()) {
-			event = faults.getEventsLastSince(eventsLastSince.get(), idFrom.get(), recordCount.get(), column.get(), direction.get());
+			event = events.getEventsLastSince(eventsLastSince.get(), idFrom.get(), recordCount.get(), column.get(), direction.get());
 		} else if (source.isPresent()) {
-			event = faults.getEventsByDeviceIP(source.get(), idFrom.get(), recordCount.get(), column.get(), direction.get());
+			event = events.getEventsByDeviceIP(source.get(), idFrom.get(), recordCount.get(), column.get(), direction.get());
 		} else if (idFrom.isPresent() && recordCount.isPresent()) {
-			event = faults.getNEventsFromRecordId(idFrom.get(), recordCount.get(),  column.get(), direction.get());
+			event = events.getNEventsFromRecordId(idFrom.get(), recordCount.get(),  column.get(), direction.get());
 		} else {
-			event = faults.getAllEvents();
+			event = events.getAllEvents();
 		}
 		return new ResponseEntity<Iterable<Event>>(event,  HttpStatus.OK);
 
