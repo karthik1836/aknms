@@ -1,9 +1,9 @@
 package com.aknms.backend.api.repo;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.aknms.backend.api.model.User;
 
-public interface UserRepo extends CrudRepository <User, Integer>{
+public interface UserRepo extends MongoRepository <User, Integer>{
 
 }
