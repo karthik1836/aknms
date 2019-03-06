@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class EventManager {
 	public static void main(String[] args) throws InterruptedException {
-		//Thread.sleep(15000L);
+		Thread.sleep(15000L);
 		SpringApplication.run(EventManager.class, args);
 	}
 	

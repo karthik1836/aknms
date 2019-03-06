@@ -5,7 +5,7 @@ networks:
     driver: bridge
 
 volumes:
-  mysql-data:
+  db-data:
 
 services:
   mysql:
@@ -13,7 +13,7 @@ services:
     container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - mysql-data:/var/lib/aknms/data
+      - db-data:/var/lib/aknms/data
     networks:
       - aknms-network
     ports:
@@ -22,10 +22,21 @@ services:
       MYSQL_DATABASE: aknms
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: admin123
- 
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - db-data:/data/db
+    networks:
+      - aknms-network
+    ports:
+      - 27017
+
   backend:
     image: arunpalani87/aknms-backend
     #image: karthik1836/aknms-backend
+    container_name: backend
     networks:
       - aknms-network
     ports:
@@ -36,6 +47,7 @@ services:
 
   frontend:
     image: arunpalani87/aknms-frontend
+    container_name: frontend
     networks:
       - aknms-network
     ports:
