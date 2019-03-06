@@ -14,8 +14,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql-data:/var/lib/aknms/data
-        #    networks:
-        #      - aknms-network
+    networks:
+      - aknms-network
     ports:
       - 3306
     environment:
@@ -24,10 +24,10 @@ services:
       MYSQL_ROOT_PASSWORD: admin123
  
   backend:
-    #image: arunpalani87/aknms-backend
-    image: karthik1836/aknms-backend
-    #    networks:
-    #      - aknms-network
+    image: arunpalani87/aknms-backend
+    #image: karthik1836/aknms-backend
+    networks:
+      - aknms-network
     ports:
       - 8080:8080
       - 8443:8443
@@ -36,9 +36,9 @@ services:
 
   frontend:
     image: arunpalani87/aknms-frontend
-    #    networks:
-    #      - aknms-network
+    networks:
+      - aknms-network
     ports:
-      - 80:3000
+      - 3000:3000
     depends_on:
       - backend
