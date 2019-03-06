@@ -1,13 +1,21 @@
 version: "3"
 
+networks:
+  aknms-network:
+    driver: bridge
+
 volumes:
-  db-data:
+  mysql-data:
 
 services:
-  db:
+  mysql:
     image: mysql
-    container_name: db
+    container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql-data:/var/lib/aknms/data
+        #    networks:
+        #      - aknms-network
     ports:
       - 3306
     environment:
@@ -18,15 +26,19 @@ services:
   backend:
     #image: arunpalani87/aknms-backend
     image: karthik1836/aknms-backend
+    #    networks:
+    #      - aknms-network
     ports:
       - 8080:8080
       - 8443:8443
     depends_on:
-      - db
+      - mysql
 
   frontend:
     image: arunpalani87/aknms-frontend
+    #    networks:
+    #      - aknms-network
     ports:
-      - 3000:3000
+      - 80:3000
     depends_on:
       - backend
