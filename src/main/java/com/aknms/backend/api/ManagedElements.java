@@ -3,16 +3,15 @@ package com.aknms.backend.api;
 import java.util.List;
 
 import com.aknms.backend.api.model.ManagedElement;
-import com.aknms.backend.api.model.User;
 
 public interface ManagedElements {
 
 	public void addManagedElement(ManagedElement managedElement);
 
-	public void removeManagedElement(int meId);
+	public void removeManagedElement(String ipAddress);
 
-	public User getManagedElement(int id);
+	public ManagedElement getManagedElement(String ipAddress);
 
-	public List<User> getManagedElement();
+	public List<ManagedElement> getManagedElements();
 
 }

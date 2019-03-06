@@ -3,13 +3,13 @@ package com.aknms.backend.api.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Document(collection = "managedElement")
 public class ManagedElement implements Serializable{
 
 	/**
@@ -17,17 +17,20 @@ public class ManagedElement implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/*
 	@Id
 	@GeneratedValue(strategy= GenerationType.TABLE)
 	private long id;
+	*/
 	
-	@NotNull
+	@Id
 	@Column(length=15)
 	private String ipAddress;
 	
-	@NotNull 
+	@JsonIgnore
 	private boolean communicationState;
 
+	/*
 	public long getId() {
 		return id;
 	}
@@ -35,6 +38,7 @@ public class ManagedElement implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
+	*/
 
 	public String getIpAddress() {
 		return ipAddress;

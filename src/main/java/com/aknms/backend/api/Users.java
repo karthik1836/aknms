@@ -7,21 +7,21 @@ import com.aknms.backend.api.model.UserGroup;
 
 public interface Users {
 
-	public void addUser(User User);
+	public List<User> getUsers();
+
+	public User getUser(String name);
+
+	public void addUser(User user);
+
+	public void updateUser(User user);
+
+	public void removeUser(String username);
 
 	public void addUserGroup(UserGroup userGroup);
 
-	public void removeUser(User user);
-
 	public void removeUserGroup(UserGroup userGroup);
 
-	public User getUser(int id);
-
-	public User getUserBy(String name);
-
 	public UserGroup getUserGroup(int id);
-
-	public List<User> getUsers();
 
 	public List<User> getUsersinGroup(UserGroup userGroup);
 

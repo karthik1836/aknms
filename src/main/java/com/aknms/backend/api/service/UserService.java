@@ -2,14 +2,16 @@ package com.aknms.backend.api.service;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aknms.backend.api.Users;
+import com.aknms.backend.api.exception.UserAlreadyExistsException;
+import com.aknms.backend.api.exception.UserNotFoundException;
 import com.aknms.backend.api.model.User;
 import com.aknms.backend.api.model.UserGroup;
 import com.aknms.backend.api.repo.UserRepo;
-import com.aknms.backend.api.exception.UserNotFoundException;
 
 @Service
 public class UserService implements Users {
@@ -18,48 +20,57 @@ public class UserService implements Users {
 	private UserRepo userRepo;
 
 	@Override
-	public void addUser(User User) {
-		// TODO Auto-generated method stub
-		
+	public User getUser(String name) throws UserNotFoundException {
+		List<User> users = userRepo.findByUsername(name);
+		if (CollectionUtils.isEmpty(users)) {
+			throw new UserNotFoundException("User with name " + name + " does not exist");
+		}
+		return users.get(0);
+	}
+
+	@Override
+	public List<User> getUsers() {
+		return userRepo.findAll();
+	}
+
+	@Override
+	public void addUser(User user) throws UserAlreadyExistsException {
+		try {
+			User userTmp = getUser(user.getUsername());
+			if (userTmp != null) {
+				throw new UserAlreadyExistsException("User with name " + user.getUsername() + " already exists");
+			}
+		} catch (UserNotFoundException ex) {
+			userRepo.save(user);
+		}
+	}
+
+	@Override
+	public void removeUser(String username) throws UserNotFoundException {
+		getUser(username);
+		userRepo.deleteUserByUsername(username);
+	}
+
+	@Override
+	public void updateUser(User user) throws UserNotFoundException {
+		removeUser(user.getUsername());
+		userRepo.save(user);
 	}
 
 	@Override
 	public void addUserGroup(UserGroup userGroup) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void removeUser(User user) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void removeUserGroup(UserGroup userGroup) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public User getUser(int id) throws UserNotFoundException {
-		return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException());
-	}
-
-	@Override
-	public User getUserBy(String name) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
 	public UserGroup getUserGroup(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<User> getUsers() {
 		// TODO Auto-generated method stub
 		return null;
 	}

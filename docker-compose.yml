@@ -44,6 +44,7 @@ services:
       - 8443:8443
     depends_on:
       - mysql
+      - mongo
 
   frontend:
     image: arunpalani87/aknms-frontend
