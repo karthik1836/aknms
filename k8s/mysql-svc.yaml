@@ -5,7 +5,11 @@ metadata:
   labels:
     app: mysql
   name: mysql
-  namespace: nms
+#  namespace: nms
 spec:
   selector:
     app: mysql
+  ports:
+  - port: 3306
+    targetPort: 3306
+

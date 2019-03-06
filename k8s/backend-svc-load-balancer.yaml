@@ -2,12 +2,12 @@ kind: Service
 apiVersion: v1
 metadata:
   name: backend-service
-  namespace: nms
+#  namespace: nms
 spec:
   selector:
-    app: nms-backend
+    app: backend
   ports:
   - protocol: TCP
     port: 8443
-    targetPort: 8443 
- 
+    targetPort: 8443
+  type: LoadBalancer 
