@@ -1,5 +1,6 @@
 package com.aknms.backend.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.aknms.backend.api.Users;
 import com.aknms.backend.api.exception.UserAlreadyExistsException;
 import com.aknms.backend.api.exception.UserNotFoundException;
+import com.aknms.backend.api.model.ManagedElement;
 import com.aknms.backend.api.model.User;
 import com.aknms.backend.api.model.UserGroup;
 import com.aknms.backend.api.repo.UserRepo;
@@ -55,6 +57,14 @@ public class UserService implements Users {
 	public void updateUser(User user) throws UserNotFoundException {
 		removeUser(user.getUsername());
 		userRepo.save(user);
+	}
+	
+	public List<String> getIpAddressListFromUser(User user) {
+		List<String> ipAddressList = new ArrayList<String>();
+		for (ManagedElement managedElement : user.getManagedElements()) {
+			ipAddressList.add(managedElement.getIpAddress());
+		}
+		return ipAddressList;
 	}
 
 	@Override

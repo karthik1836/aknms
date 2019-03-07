@@ -16,7 +16,7 @@ public interface Users {
 	public void updateUser(User user);
 
 	public void removeUser(String username);
-
+	
 	public void addUserGroup(UserGroup userGroup);
 
 	public void removeUserGroup(UserGroup userGroup);

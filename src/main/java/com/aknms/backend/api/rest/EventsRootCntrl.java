@@ -1,11 +1,11 @@
 package com.aknms.backend.api.rest;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,9 +27,13 @@ public class EventsRootCntrl {
 	private Events events;
 
 	@RequestMapping(value = "/event/count", method = RequestMethod.GET)
-	public ResponseEntity<List<EventTypeCount>> getEventsCount() {
-		List<EventTypeCount> eventCount = events.getEventCount();
-		
+	public ResponseEntity<List<EventTypeCount>> getEventsCount(@RequestParam(value = "user") Optional<String> user) {
+		List<EventTypeCount> eventCount = new ArrayList<EventTypeCount>();
+		if (user.isPresent()) {
+			eventCount = events.getEventCountFilterUser(user.get());
+		} else {
+			eventCount = events.getEventCount();
+		}
 		return new ResponseEntity<List<EventTypeCount>>(eventCount, HttpStatus.OK);
 
 	}
@@ -44,24 +48,30 @@ public class EventsRootCntrl {
 	public ResponseEntity<Iterable<Event>> getEvent(@RequestParam(value = "type") Optional<String> eventType,
 			@RequestParam(value = "eventsLastSince") Optional<Integer> eventsLastSince,
 			@RequestParam(value = "source") Optional<String> source,
-			@RequestParam(value = "id-from", defaultValue = "0" ) Optional<Integer> idFrom,
+			@RequestParam(value = "id-from", defaultValue = "0") Optional<Integer> idFrom,
 			@RequestParam(value = "sort_key", defaultValue = "id") Optional<String> column,
 			@RequestParam(value = "sort_dir", defaultValue = "ASC") Optional<String> direction,
-			@RequestParam(value = "count", defaultValue = "50") Optional<Integer> recordCount)
-			throws UnknownHostException {
+			@RequestParam(value = "count", defaultValue = "50") Optional<Integer> recordCount,
+			@RequestParam(value = "user") Optional<String> user) throws UnknownHostException {
 		Iterable<Event> event = null;
 		if (eventType.isPresent()) {
-			event = events.getEventByType(eventType.get().toUpperCase().trim(), idFrom.get(), recordCount.get(), column.get(), direction.get());
+			event = events.getEventByType(eventType.get().toUpperCase().trim(), idFrom.get(), recordCount.get(),
+					column.get(), direction.get());
 		} else if (eventsLastSince.isPresent()) {
-			event = events.getEventsLastSince(eventsLastSince.get(), idFrom.get(), recordCount.get(), column.get(), direction.get());
+			event = events.getEventsLastSince(eventsLastSince.get(), idFrom.get(), recordCount.get(), column.get(),
+					direction.get());
 		} else if (source.isPresent()) {
-			event = events.getEventsByDeviceIP(source.get(), idFrom.get(), recordCount.get(), column.get(), direction.get());
-		} else if (idFrom.isPresent() && recordCount.isPresent()) {
-			event = events.getNEventsFromRecordId(idFrom.get(), recordCount.get(),  column.get(), direction.get());
+			event = events.getEventsByDeviceIP(source.get(), idFrom.get(), recordCount.get(), column.get(),
+					direction.get());
+		} else if (idFrom.isPresent() && recordCount.isPresent() && !user.isPresent()) {
+			event = events.getNEventsFromRecordId(idFrom.get(), recordCount.get(), column.get(), direction.get());
+		} else if (idFrom.isPresent() && recordCount.isPresent() && user.isPresent()) {
+			event = events.getNEventsFromRecordIdFilterUser(idFrom.get(), recordCount.get(), user.get(), column.get(),
+					direction.get());
 		} else {
 			event = events.getAllEvents();
 		}
-		return new ResponseEntity<Iterable<Event>>(event,  HttpStatus.OK);
+		return new ResponseEntity<Iterable<Event>>(event, HttpStatus.OK);
 
 	}
 

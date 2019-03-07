@@ -10,6 +10,8 @@ public interface Events {
 
 	public List<EventTypeCount> getEventCount();
 
+	public List<EventTypeCount> getEventCountFilterUser(String user);
+
 	public Event getEventById(long id);
 
 	public Iterable<Event> getAllEvents();
@@ -27,7 +29,10 @@ public interface Events {
 	public List<Event> getEventsLastSince(int lastSinceInMinutes, Integer fromRecordId, Integer recordCount,
 			String column, String direction);
 
-	public List<Event> getNEventsFromRecordId(Integer fromRecordId, Integer recordCount, String column,
-			String direction);
+	public List<Event> getNEventsFromRecordId(Integer fromRecordId, Integer recordCount,
+			String column, String direction);
+
+	public List<Event> getNEventsFromRecordIdFilterUser(Integer fromRecordId, Integer recordCount, String user,
+			String column, String direction);
 
 }

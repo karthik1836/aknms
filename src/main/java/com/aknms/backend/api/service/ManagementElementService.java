@@ -38,7 +38,11 @@ public class ManagementElementService implements ManagedElements {
 
 	@Override
 	public void removeManagedElement(String ipAddress) {
-		// TODO Auto-generated method stub
+		/*
+		get the managed elemtn
+		get all users which has this managed element
+		update all users by removing the element
+		*/
 	}
 
 	@Override
